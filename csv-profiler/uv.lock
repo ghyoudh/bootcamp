@@ -32,7 +32,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "typer", specifier = ">=0.20.0" }]
+requires-dist = [{ name = "typer", extras = ["all"], specifier = ">=0.20.0" }]
 
 [[package]]
 name = "markdown-it-py"
