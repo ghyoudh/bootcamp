@@ -1,21 +1,94 @@
 {
-  "rows": 4,
-  "columns": [
-    "name",
-    "age",
-    "city",
-    "salary"
-  ],
-  "missing": {
-    "name": 0,
-    "age": 0,
-    "city": 1,
-    "salary": 2
+  "summary": {
+    "rows": 4,
+    "columns": 4,
+    "column_names": [
+      "name",
+      "age",
+      "city",
+      "salary"
+    ]
   },
-  "non_empty": {
-    "name": 4,
-    "age": 4,
-    "city": 3,
-    "salary": 2
+  "columns": {
+    "name": {
+      "count": 4,
+      "missing": 0,
+      "unique": 4,
+      "top": [
+        {
+          "value": "Aisha",
+          "count": 1
+        },
+        {
+          "value": "Fahad",
+          "count": 1
+        },
+        {
+          "value": "Noor",
+          "count": 1
+        },
+        {
+          "value": "Salem",
+          "count": 1
+        }
+      ]
+    },
+    "age": {
+      "count": 3,
+      "missing": 1,
+      "unique": 3,
+      "top": [
+        {
+          "value": "23",
+          "count": 1
+        },
+        {
+          "value": "29",
+          "count": 1
+        },
+        {
+          "value": "31",
+          "count": 1
+        }
+      ]
+    },
+    "city": {
+      "count": 3,
+      "missing": 1,
+      "unique": 3,
+      "top": [
+        {
+          "value": "Riyadh",
+          "count": 1
+        },
+        {
+          "value": "Jeddah",
+          "count": 1
+        },
+        {
+          "value": "Dammam",
+          "count": 1
+        }
+      ]
+    },
+    "salary": {
+      "count": 3,
+      "missing": 1,
+      "unique": 3,
+      "top": [
+        {
+          "value": "12000",
+          "count": 1
+        },
+        {
+          "value": "9000",
+          "count": 1
+        },
+        {
+          "value": "15000",
+          "count": 1
+        }
+      ]
+    }
   }
 }

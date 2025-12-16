@@ -1,32 +1,27 @@
-def basic_profile(rows: list[dict[str, str]]) -> dict:
+def get_columns(rows: list[dict[str, str]]) -> list[str]:
     if not rows:
-     return {"rows": 0, "columns": {}, "notes": ["Empty dataset"]}
+        return []
+    return list(rows[0].keys())
 
-    columns = list(rows[0].keys())
-    missing = {c: 0 for c in columns}
-    non_empty = {c: 0 for c in columns}
-
-    for row in rows:
-        for c in columns:
-            v = (row.get(c) or "").strip()
-            if v == "":
-                missing[c] += 1
-            else:
-                non_empty[c] += 1
-
-    return {
-        "rows": len(rows),
-        "columns": columns,
-        "missing": missing,
-        "non_empty": non_empty,
+def basic_profile(rows: list[dict[str, str]]) -> dict:
+    cols = get_columns(rows)
+    report = {
+        "summary": {
+            "rows": len(rows),
+            "columns": len(cols),
+            "column_names": cols,
+        },
+        "columns": {},
     }
+    for col in cols:
+        values = column_values(rows, col)
+        typ = infer_type(values)
+        if typ == "float":
+            report["columns"][col] = numeric_stats(values)
+        else:
+            report["columns"][col] = text_stats(values)
     
-def is_number (s: str) -> bool:
-        try:
-            float(s)
-            return True
-        except ValueError:
-            return False
+    return report
 
 MISSING = {"", "na", "n/a", "null", "none", "nan"}
 def is_missing(value: str | None) -> bool:
@@ -35,6 +30,8 @@ def is_missing(value: str | None) -> bool:
     return value.strip().casefold() in MISSING
 
 def try_float(value: str) -> float | None:
+    if value is None:
+        return None
     try:
         return float(value)
     except ValueError:
@@ -77,3 +74,14 @@ def numeric_stats(values: list[str]) -> dict:
         "max": max(nums) if nums else None,
         "sum": sum(nums) if nums else None,
     }
+
+def text_stats(values: list[str], top_k: int = 5) -> dict:
+    usable = [v for v in values if not is_missing(v)]
+    missing = len(values) - len(usable)
+    counts: dict[str, int] = {}
+    for v in usable:
+        counts[v] = counts.get(v, 0) + 1
+    top_items = sorted(counts.items(), key=lambda kv: kv[1], reverse=True)
+    top = [{"value": v, "count": c} for v, c in top_items]
+    
+    return {"count": len(usable),"missing": missing, "unique": len(counts), "top": top[:top_k]}

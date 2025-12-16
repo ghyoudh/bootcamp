@@ -3,6 +3,15 @@ from pathlib import Path
 
 import json
 
+def md_header(title: str) -> list[str]:
+    return [f"# {title}", ""]
+
+def md_table_header() -> list[str]:
+    return ["| Column Name | Inferred Type | Non-Null Count | Null Count |"]
+
+def md_table_row(name: str, col: dict, total_rows: int) -> list[str]:
+    return [f"| {name} | {col.get('type', 'unknown')} | {col.get('non_null', 0)} | {col.get('null', 0)} |"]
+
 def write_json(report: dict, path: str | Path) -> None:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -14,8 +23,16 @@ def write_markdown(report: dict, path: str | Path) -> None:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
 
-    columns = report.get("columns", [])
-    missing = report.get("missing", {})
+    rows = report["summary"]["rows"]
+
     lines: list[str] = []
-    lines.append(f"# CSV Profile Report\n\n")
-    lines.append(f"- Rows: **{report.get('rows', 0)}**")
+    lines.extend(md_header("data/sample.csv"))
+    lines.append("## Summary")
+    lines.append(f"- Rows: {rows:,}")
+    lines.append("")
+    lines.append(f"- Columns: {report['summary']['columns']:,}")
+    lines.append("## Columns (table)")
+    lines.extend(md_table_header())
+    for name, col in report["columns"].items():
+        lines.extend(md_table_row(name, col, rows))
+    lines.append("")
