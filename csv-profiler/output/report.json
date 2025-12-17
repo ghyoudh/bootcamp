@@ -1,6 +1,6 @@
 {
   "summary": {
-    "rows": 4,
+    "rows": 8,
     "columns": 4,
     "column_names": [
       "name",
@@ -11,9 +11,9 @@
   },
   "columns": {
     "name": {
-      "count": 4,
+      "count": 8,
       "missing": 0,
-      "unique": 4,
+      "unique": 8,
       "top": [
         {
           "value": "Aisha",
@@ -30,13 +30,17 @@
         {
           "value": "Salem",
           "count": 1
+        },
+        {
+          "value": "Sara Khan",
+          "count": 1
         }
       ]
     },
     "age": {
-      "count": 3,
+      "count": 7,
       "missing": 1,
-      "unique": 3,
+      "unique": 7,
       "top": [
         {
           "value": "23",
@@ -49,32 +53,48 @@
         {
           "value": "31",
           "count": 1
+        },
+        {
+          "value": "34",
+          "count": 1
+        },
+        {
+          "value": "41",
+          "count": 1
         }
       ]
     },
     "city": {
-      "count": 3,
+      "count": 7,
       "missing": 1,
-      "unique": 3,
+      "unique": 5,
       "top": [
+        {
+          "value": "Jeddah",
+          "count": 2
+        },
+        {
+          "value": "Dammam",
+          "count": 2
+        },
         {
           "value": "Riyadh",
           "count": 1
         },
         {
-          "value": "Jeddah",
+          "value": "Mecca",
           "count": 1
         },
         {
-          "value": "Dammam",
+          "value": "Khobar",
           "count": 1
         }
       ]
     },
     "salary": {
-      "count": 3,
+      "count": 7,
       "missing": 1,
-      "unique": 3,
+      "unique": 7,
       "top": [
         {
           "value": "12000",
@@ -86,6 +106,14 @@
         },
         {
           "value": "15000",
+          "count": 1
+        },
+        {
+          "value": "9200",
+          "count": 1
+        },
+        {
+          "value": "11000",
           "count": 1
         }
       ]

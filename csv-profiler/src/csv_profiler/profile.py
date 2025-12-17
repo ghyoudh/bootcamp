@@ -1,8 +1,3 @@
-def get_columns(rows: list[dict[str, str]]) -> list[str]:
-    if not rows:
-        return []
-    return list(rows[0].keys())
-
 def basic_profile(rows: list[dict[str, str]]) -> dict:
     cols = get_columns(rows)
     report = {
@@ -20,8 +15,13 @@ def basic_profile(rows: list[dict[str, str]]) -> dict:
             report["columns"][col] = numeric_stats(values)
         else:
             report["columns"][col] = text_stats(values)
-    
+
     return report
+
+def get_columns(rows: list[dict[str, str]]) -> list[str]:
+    if not rows:
+        return []
+    return list(rows[0].keys())
 
 MISSING = {"", "na", "n/a", "null", "none", "nan"}
 def is_missing(value: str | None) -> bool:

@@ -36,3 +36,4 @@ def write_markdown(report: dict, path: str | Path) -> None:
     for name, col in report["columns"].items():
         lines.extend(md_table_row(name, col, rows))
     lines.append("")
+    path.write_text("\n".join(lines), encoding="utf-8")
