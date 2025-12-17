@@ -14,5 +14,5 @@ uv install
 
 ## run 
 ```bash 
-uv run python main.py
+uv run python main.py data/sample.csv
 ```
