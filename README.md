@@ -13,7 +13,7 @@ uv install
 ```
 
 ## run 
-``bash 
+```bash 
 uv run python main.py data/sample.csv
 ```
 # App Interface 
@@ -30,9 +30,9 @@ uv install
 ```
 
 ## run 
-``bash 
+```bash 
 python -m streamlit run src/interfaces/app.py
 ```
 
 ## Output Screenshot
-(csv-profiler\images\Screenshot.png)[Output]
+![output](csv-profiler/images/Screenshot.png)
