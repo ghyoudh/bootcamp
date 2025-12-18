@@ -8,15 +8,44 @@ def basic_profile(rows: list[dict[str, str]]) -> dict:
         },
         "columns": {},
     }
+
     for col in cols:
         values = column_values(rows, col)
         typ = infer_type(values)
-        if typ == "float":
-            report["columns"][col] = numeric_stats(values)
-        else:
-            report["columns"][col] = text_stats(values)
+
+        # Count nulls and non-nulls
+        non_null_values = [v for v in values if v is not None and v != ""]
+        null_count = len(values) - len(non_null_values)
+        non_null_count = len(non_null_values)
+
+        # Unique values
+        unique_values = set(non_null_values)
+
+        # Column report
+        col_report = {
+            "type": typ,
+            "non_null": non_null_count,
+            "null": null_count,
+            "unique": len(unique_values),
+        }
+
+        # Add simple stats if numeric
+        if typ in ("int", "float"):
+            try:
+                numeric_values = [float(v) for v in non_null_values]
+                col_report.update({
+                    "min": min(numeric_values),
+                    "max": max(numeric_values),
+                })
+            except ValueError:
+                # If conversion fails, skip stats
+                pass
+
+        # Save column profile
+        report["columns"][col] = col_report
 
     return report
+
 
 def get_columns(rows: list[dict[str, str]]) -> list[str]:
     if not rows:
@@ -30,8 +59,6 @@ def is_missing(value: str | None) -> bool:
     return value.strip().casefold() in MISSING
 
 def try_float(value: str) -> float | None:
-    if value is None:
-        return None
     try:
         return float(value)
     except ValueError:
@@ -41,15 +68,24 @@ def infer_type(values: list[str]) -> str:
     if not values:
         return "unknown"
 
-    float_count = sum(1 for v in values if try_float(v) is not None)
-    missing_count = sum(1 for v in values if is_missing(v))
-
-    if float_count == len(values):
-        return "float"
-    elif missing_count == len(values):
+    # Filter out missing values
+    non_missing = [v for v in values if not is_missing(v)]
+    if not non_missing:
         return "missing"
-    else:
-        return "string"
+
+    # Try integer detection
+    int_count = sum(1 for v in non_missing if v.isdigit())
+    if int_count == len(non_missing):
+        return "int"
+
+    # Try float detection
+    float_count = sum(1 for v in non_missing if try_float(v) is not None)
+    if float_count == len(non_missing):
+        return "float"
+
+    # Default fallback
+    return "string"
+
     
 def column_values(rows: list[dict[str, str]], col: str) -> list[str]:
     return [row.get(col, "") for row in rows]

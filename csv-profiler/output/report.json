@@ -11,112 +11,32 @@
   },
   "columns": {
     "name": {
-      "count": 8,
-      "missing": 0,
-      "unique": 8,
-      "top": [
-        {
-          "value": "Aisha",
-          "count": 1
-        },
-        {
-          "value": "Fahad",
-          "count": 1
-        },
-        {
-          "value": "Noor",
-          "count": 1
-        },
-        {
-          "value": "Salem",
-          "count": 1
-        },
-        {
-          "value": "Sara Khan",
-          "count": 1
-        }
-      ]
+      "type": "string",
+      "non_null": 8,
+      "null": 0,
+      "unique": 8
     },
     "age": {
-      "count": 7,
-      "missing": 1,
+      "type": "int",
+      "non_null": 7,
+      "null": 1,
       "unique": 7,
-      "top": [
-        {
-          "value": "23",
-          "count": 1
-        },
-        {
-          "value": "29",
-          "count": 1
-        },
-        {
-          "value": "31",
-          "count": 1
-        },
-        {
-          "value": "34",
-          "count": 1
-        },
-        {
-          "value": "41",
-          "count": 1
-        }
-      ]
+      "min": 23.0,
+      "max": 41.0
     },
     "city": {
-      "count": 7,
-      "missing": 1,
-      "unique": 5,
-      "top": [
-        {
-          "value": "Jeddah",
-          "count": 2
-        },
-        {
-          "value": "Dammam",
-          "count": 2
-        },
-        {
-          "value": "Riyadh",
-          "count": 1
-        },
-        {
-          "value": "Mecca",
-          "count": 1
-        },
-        {
-          "value": "Khobar",
-          "count": 1
-        }
-      ]
+      "type": "string",
+      "non_null": 7,
+      "null": 1,
+      "unique": 5
     },
     "salary": {
-      "count": 7,
-      "missing": 1,
+      "type": "int",
+      "non_null": 7,
+      "null": 1,
       "unique": 7,
-      "top": [
-        {
-          "value": "12000",
-          "count": 1
-        },
-        {
-          "value": "9000",
-          "count": 1
-        },
-        {
-          "value": "15000",
-          "count": 1
-        },
-        {
-          "value": "9200",
-          "count": 1
-        },
-        {
-          "value": "11000",
-          "count": 1
-        }
-      ]
+      "min": 7800.0,
+      "max": 15000.0
     }
   }
 }
